@@ -1,0 +1,59 @@
+#! /usr/bin/env python2
+#-*-Python-*-
+
+import sys, os
+import logging
+import argparse
+
+def interactive():
+    import readline
+    import rlcompleter
+    readline.parse_and_bind("tab: complete")
+    
+    import code
+    print("\nLaunching python interactive shell ...\n")
+    code.interact(local=globals())
+    
+def main():
+    parser = argparse.ArgumentParser(description = "gkrcmd: command line for the gnome keyring")
+    
+    parser.add_argument("-e", "--execute", default=None, metavar="COMMAND", help="execute COMMAND and exit")
+    
+    args = parser.parse_args()
+    
+    import gkrcmd.cli
+    ui = gkrcmd.cli.Cmd()
+    ui.load()
+    
+    if args.execute:
+        ui.onecmd(args.execute)
+        ui.exit()
+        return
+    
+    # main execution mode
+    ui.cmdloop()
+    
+if __name__ == "__main__":
+    
+    # DEBUG mode
+    if os.environ.get("DEBUG"):
+        
+        logging.basicConfig(level=logging.DEBUG)
+        sys.path.insert(0, os.path.dirname(__file__)+"/..")
+        
+        # import gkrcmd.cons
+        # gkrcmd.cons.CONFIGDIR = tvcmd.cons.CONFIGDIR+"_debug"
+        
+        import traceback
+        try: main()
+        except SystemExit: pass
+        except: traceback.print_exc()
+        
+        # interactive()
+        
+    # NORMAL mode
+    else:
+        
+        logging.basicConfig(level=logging.INFO)
+        main()
+        sys.exit(0)

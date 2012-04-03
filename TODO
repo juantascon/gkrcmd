@@ -1,0 +1,4 @@
+commands:
+
+keyring, keyring_new, keyring_rm, keyring_ls, ls, lock, unlock, cat, edit, new, rm
+
