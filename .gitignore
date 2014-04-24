@@ -1,0 +1,6 @@
+__pycache__*
+tvcmd.egg-info/
+build/
+dist/
+MANIFEST
+
