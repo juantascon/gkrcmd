@@ -1,0 +1,8 @@
+[1week] Evaluate and code if it is necessary to use direct calls to the dbus interface (it currently uses the python-gnomekeyring lib)
+[3weeks] build the commands: keyring_set (sets the current keyring), keyring_new, keyring_rm and keyring_ls
+[3weeks] build the commands: ls (list the keys of the current keyring), rm (deletes the current keyring), cat (display the content of a key in the current keyring), lock (locks the current keyring) and unlock
+[2weeks] build the commands: edit (edits a key) and new (creates a new key in the current keyring)
+[2weeks] allows calls that execute commands and then exits, useful for batch operations, something like this: gkrcmd -e "keyring_new -n KeyringName -p HardToGuessPassword"
+[3weeks] tests
+[2weeks] integration into the official gnome keyring ??
+http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/juantascon/1#
